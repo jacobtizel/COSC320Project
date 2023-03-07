@@ -73,7 +73,6 @@ public class RabinKarpAnalysis {
         return contentsList;
     }
 
-
     public static long[] algorithmicTest(String testType, int runNumber, int stepSize) {
         long[] runtimes = new long[runNumber/stepSize]; //Runtime for each independent variable
         List<String> dataset = new ArrayList<>();
@@ -181,5 +180,4 @@ public class RabinKarpAnalysis {
     public static void main(String[] args) {
     //algorithmicTest("datanumber", 500, 10);
     multiTester("datanumber", 500, 10, 10);
-    }
 }
