@@ -24,8 +24,6 @@ public class RabinKarpAnalysis {
         for (int i = mLen; i < nLen; i++) {
             nHash = nHash - n.charAt(i - mLen) * (int) Math.pow(31, mLen - 1);
             nHash = nHash * 31 + n.charAt(i);
-            // System.out.println(nHash);
-            // System.out.println(mHash);
             if (mHash == nHash && m.equals(n.substring(i - mLen + 1, i + 1))) {
                 matches++;
             }
@@ -74,45 +72,72 @@ public class RabinKarpAnalysis {
         return contentsList;
     }
 
-    public static void algorithmicTest(String type, int run_number) {
-        int[] data_length = new int[run_number]; //Place for storing the independant variables
-        long[] runtimes = new long[run_number]; //Runtime for each independent variable
+
+    public static void algorithmicTest(String testType, int runNumber) {
+        int[] data_length = new int[runNumber]; //Place for storing the independent variables
+        long[] runtimes = new long[runNumber]; //Runtime for each independent variable
         List<String> dataset = new ArrayList<>();
-        String[] contents = new String[run_number];
-        switch(type){
-            case "datanumber": //independant variable being the number of elements in the dataset
-            contents[0] = "aaaaa";
-            dataset = new ArrayList<String>();
-            for(int i = 0; i < run_number; i++){
+        String[] contents = new String[runNumber];
+        Arrays.fill(contents, "");
+        String test_string = "aaaaa";
+        switch(testType){
+            case "datanumber": //independent variable being the number of elements in the dataset
+            contents[0] = test_string;
+            for(int i = 0; i < runNumber; i++){
                 long startTime = System.currentTimeMillis();
-                dataset.add("aaaaa");
+                dataset.add(test_string);
                 contentComparer(contents, dataset); 
                 long totalTime = System.currentTimeMillis() - startTime;
                 data_length[i] = i+1;
                 runtimes[i] = totalTime;
             }
             break;
-            case "datasize": //independant variable being the size of elements in the dataset
-            contents[0] = "aaaaa"; 
-            String s = "aaaaa";
-            dataset.clear();
-            dataset.add("aaaaa");
-            for(int i = 0; i < run_number; i++){
+
+            case "datasize": //independent variable being the size of elements in the dataset
+            contents[0] = test_string; 
+            String s = test_string;
+            dataset.add("");
+            for(int i = 0; i < runNumber; i++){
                 long startTime = System.currentTimeMillis();
-                s.concat("aaaaa");
                 dataset.set(0, s);
+                s = s.concat(test_string);
                 contentComparer(contents, dataset); 
                 long totalTime = System.currentTimeMillis() - startTime;
                 data_length[i] = i+1;
                 runtimes[i] = totalTime;
             }
             break;
-            case "file":
+
+            case "filenumber": //independent variable being number of elements from file
+            dataset.add(test_string);
+            for(int i = 0; i < runNumber; i++){
+                long startTime = System.currentTimeMillis();
+                contents[i] = test_string;
+                contentComparer(contents, dataset); 
+                long totalTime = System.currentTimeMillis() - startTime;
+                data_length[i] = i+1;
+                runtimes[i] = totalTime;
+            }
+            
             break;
+            case "filesize": //independent variable being size of elements from file
+            dataset.add(test_string);
+            for(int i = 0; i < runNumber; i++){
+                long startTime = System.currentTimeMillis();
+                contents[0] = contents[0].concat(test_string); 
+                contentComparer(contents, dataset); 
+                long totalTime = System.currentTimeMillis() - startTime;
+                data_length[i] = i+1;
+                runtimes[i] = totalTime;
+            }
+            
+                       break;
             default:
             break;
         }
-
+        
+        System.out.println(Arrays.toString(data_length));
+        System.out.println(Arrays.toString(runtimes));
     }
 
     public static int contentComparer(String[] contents, List<String> dataset){
@@ -127,18 +152,6 @@ public class RabinKarpAnalysis {
     }
 
     public static void main(String[] args) {
-        long startTime = System.currentTimeMillis();
-        String[] contents = readOriginal("./data/orange.txt");
-        List<String> dataset = readOther("orange.txt");
-        int matches = contentComparer(contents, dataset);
-
-        if (matches >= (contents.length) / 2) {
-            System.out.println("This document is plagiarised");
-        } else {
-            System.out.println("This document not plagiarised");
-        }
-
-        long totalTime = System.currentTimeMillis() - startTime;
-        System.out.println(totalTime);
+    algorithmicTest("filenumber", 250);
     }
 }
