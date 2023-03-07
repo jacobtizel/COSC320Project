@@ -81,7 +81,7 @@ public class RabinKarpAnalysis {
         String test_string = "aaaaa"; //adding on this string each time
         switch(testType){
             case "datanumber": //independent variable being the number of elements in the dataset
-            contents[0] = test_string;
+            for(int i = 0; i < 500; i++){contents[0] = contents[0] + test_string;}
             for(int i = 0; i < runNumber; i++){
                 dataset.add(test_string);
                 if(i%stepSize == 0){
@@ -94,7 +94,10 @@ public class RabinKarpAnalysis {
             break;
 
             case "datasize": //independent variable being the size of elements in the dataset
-            contents[0] = test_string; 
+
+            // contents[0] = test_string; 
+            for(int i = 0; i < 500; i++){contents[0] = contents[0] + test_string;}
+
             String s = test_string;
             dataset.add("");
             for(int i = 0; i < runNumber; i++){
@@ -110,7 +113,7 @@ public class RabinKarpAnalysis {
             break;
 
             case "filenumber": //independent variable being number of elements from file
-            dataset.add(test_string);
+            for(int i = 0; i < 500; i++){dataset.add(test_string);}
             for(int i = 0; i < runNumber; i++){
                 contents[i] = test_string;
                 if(i%stepSize == 0){
@@ -123,7 +126,8 @@ public class RabinKarpAnalysis {
             break;
 
             case "filesize": //independent variable being size of elements from file
-            dataset.add(test_string);
+            for(int i = 0; i < 500; i++){dataset.add(test_string);}
+
             for(int i = 0; i < runNumber; i++){
                 contents[0] = contents[0] + test_string; 
                 if(i%stepSize == 0){
@@ -179,6 +183,8 @@ public class RabinKarpAnalysis {
 
     public static void main(String[] args) {
     //algorithmicTest("datanumber", 500, 10);
-    multiTester("datanumber", 500, 10, 10);
+
+    multiTester("datanumber", 2000, 50, 10);
+
     }
 }
