@@ -1,4 +1,5 @@
 import java.io.BufferedReader;
+import java.io.FileWriter;
 import java.io.File;
 import java.io.FileReader;
 import java.io.IOException;
@@ -73,23 +74,23 @@ public class RabinKarpAnalysis {
     }
 
 
-    public static void algorithmicTest(String testType, int runNumber) {
-        int[] data_length = new int[runNumber]; //Place for storing the independent variables
-        long[] runtimes = new long[runNumber]; //Runtime for each independent variable
+    public static long[] algorithmicTest(String testType, int runNumber, int stepSize) {
+        long[] runtimes = new long[runNumber/stepSize]; //Runtime for each independent variable
         List<String> dataset = new ArrayList<>();
         String[] contents = new String[runNumber];
         Arrays.fill(contents, "");
-        String test_string = "aaaaa";
+        String test_string = "aaaaa"; //adding on this string each time
         switch(testType){
             case "datanumber": //independent variable being the number of elements in the dataset
             contents[0] = test_string;
             for(int i = 0; i < runNumber; i++){
-                long startTime = System.currentTimeMillis();
                 dataset.add(test_string);
-                contentComparer(contents, dataset); 
-                long totalTime = System.currentTimeMillis() - startTime;
-                data_length[i] = i+1;
-                runtimes[i] = totalTime;
+                if(i%stepSize == 0){
+                    long startTime = System.currentTimeMillis();
+                    contentComparer(contents, dataset); 
+                    long totalTime = System.currentTimeMillis() - startTime;
+                    runtimes[i/stepSize] = totalTime;
+                }
             }
             break;
 
@@ -98,46 +99,72 @@ public class RabinKarpAnalysis {
             String s = test_string;
             dataset.add("");
             for(int i = 0; i < runNumber; i++){
-                long startTime = System.currentTimeMillis();
                 dataset.set(0, s);
-                s = s.concat(test_string);
-                contentComparer(contents, dataset); 
-                long totalTime = System.currentTimeMillis() - startTime;
-                data_length[i] = i+1;
-                runtimes[i] = totalTime;
+                s = s + test_string;
+                if(i%stepSize == 0){
+                    long startTime = System.currentTimeMillis();
+                    contentComparer(contents, dataset); 
+                    long totalTime = System.currentTimeMillis() - startTime;
+                    runtimes[i/stepSize] = totalTime;
+                }
             }
             break;
 
             case "filenumber": //independent variable being number of elements from file
             dataset.add(test_string);
             for(int i = 0; i < runNumber; i++){
-                long startTime = System.currentTimeMillis();
                 contents[i] = test_string;
-                contentComparer(contents, dataset); 
-                long totalTime = System.currentTimeMillis() - startTime;
-                data_length[i] = i+1;
-                runtimes[i] = totalTime;
+                if(i%stepSize == 0){
+                    long startTime = System.currentTimeMillis();
+                    contentComparer(contents, dataset); 
+                    long totalTime = System.currentTimeMillis() - startTime;
+                    runtimes[i/stepSize] = totalTime;
+                }
             }
-            
             break;
+
             case "filesize": //independent variable being size of elements from file
             dataset.add(test_string);
             for(int i = 0; i < runNumber; i++){
-                long startTime = System.currentTimeMillis();
-                contents[0] = contents[0].concat(test_string); 
-                contentComparer(contents, dataset); 
-                long totalTime = System.currentTimeMillis() - startTime;
-                data_length[i] = i+1;
-                runtimes[i] = totalTime;
+                contents[0] = contents[0] + test_string; 
+                if(i%stepSize == 0){
+                    long startTime = System.currentTimeMillis();
+                    contentComparer(contents, dataset); 
+                    long totalTime = System.currentTimeMillis() - startTime;
+                    runtimes[i/stepSize] = totalTime;
+                }
             }
-            
-                       break;
+            break;
+
             default:
             break;
         }
-        
-        System.out.println(Arrays.toString(data_length));
-        System.out.println(Arrays.toString(runtimes));
+       return runtimes; 
+    }
+
+    public static void multiTester(String testType, int runNumber, int stepSize, int numOfTests){
+        int arrayLength = runNumber/stepSize;
+        long[][] tests = new long[numOfTests][arrayLength];
+        for(int i = 0; i < numOfTests; i++){
+            tests[i] = algorithmicTest(testType, runNumber, stepSize);
+        }
+        long[] avg = new long[arrayLength];
+        Arrays.fill(avg, 0);
+        for(int i = 0; i < arrayLength; i++){
+            for(int j = 0; j < numOfTests; j++){
+                avg[i] += tests[j][i];
+            }
+            avg[i] /= numOfTests;
+        }
+        System.out.println(Arrays.toString(avg));
+        try{
+            FileWriter fw = new FileWriter("./analysis/" + testType + runNumber + ".js");
+            fw.write(Arrays.toString(avg));
+            fw.close();
+        }
+        catch (IOException e) {
+            e.printStackTrace();
+        }
     }
 
     public static int contentComparer(String[] contents, List<String> dataset){
@@ -152,6 +179,7 @@ public class RabinKarpAnalysis {
     }
 
     public static void main(String[] args) {
-    algorithmicTest("filenumber", 250);
+    //algorithmicTest("datanumber", 500, 10);
+    multiTester("datanumber", 500, 10, 10);
     }
 }
