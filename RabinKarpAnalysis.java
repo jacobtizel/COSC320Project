@@ -180,4 +180,5 @@ public class RabinKarpAnalysis {
     public static void main(String[] args) {
     //algorithmicTest("datanumber", 500, 10);
     multiTester("datanumber", 500, 10, 10);
+    }
 }
