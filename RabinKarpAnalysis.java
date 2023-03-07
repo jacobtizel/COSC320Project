@@ -73,7 +73,6 @@ public class RabinKarpAnalysis {
         return contentsList;
     }
 
-
     public static long[] algorithmicTest(String testType, int runNumber, int stepSize) {
         long[] runtimes = new long[runNumber/stepSize]; //Runtime for each independent variable
         List<String> dataset = new ArrayList<>();
@@ -95,8 +94,10 @@ public class RabinKarpAnalysis {
             break;
 
             case "datasize": //independent variable being the size of elements in the dataset
+
             // contents[0] = test_string; 
             for(int i = 0; i < 500; i++){contents[0] = contents[0] + test_string;}
+
             String s = test_string;
             dataset.add("");
             for(int i = 0; i < runNumber; i++){
@@ -126,6 +127,7 @@ public class RabinKarpAnalysis {
 
             case "filesize": //independent variable being size of elements from file
             for(int i = 0; i < 500; i++){dataset.add(test_string);}
+
             for(int i = 0; i < runNumber; i++){
                 contents[0] = contents[0] + test_string; 
                 if(i%stepSize == 0){
@@ -181,6 +183,8 @@ public class RabinKarpAnalysis {
 
     public static void main(String[] args) {
     //algorithmicTest("datanumber", 500, 10);
+
     multiTester("datanumber", 2000, 50, 10);
+
     }
 }

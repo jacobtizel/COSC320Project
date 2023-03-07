@@ -85,7 +85,7 @@ public class project {
             System.out.println("This document is plagiarised");
          }
          else{
-             System.out.println("This document not plagiarised");
+             System.out.println("This document is not plagiarised");
          }
    }
 }
