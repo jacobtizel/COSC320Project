@@ -1,11 +1,6 @@
-import java.io.BufferedReader;
 import java.io.FileWriter;
-import java.io.File;
-import java.io.FileReader;
 import java.io.IOException;
-import java.util.ArrayList;
 import java.util.Arrays;
-import java.util.List;
 import java.util.Random;
 
 public class LCSSAnalysis {
@@ -33,7 +28,7 @@ public class LCSSAnalysis {
 
         String test_string = "aaaab"; // adding on this string each time
 
-        StringBuilder pattern_builder = new StringBuilder();
+        StringBuilder pattern_builder = new StringBuilder(); // make pattern for stringlength and randomstring 5 instances of teststring
         for(int i = 0; i < 5; i++){
             pattern_builder.append(test_string);
         }
@@ -113,7 +108,7 @@ public class LCSSAnalysis {
     public static void main(String[] args) {
         multiTester("stringlength", 50000, 1000, 20);
         multiTester("randomstring", 50000, 1000, 20);
-        //multiTester("patternanddata", 5000, 250, 10);
+        multiTester("patternanddata", 5000, 250, 10);
     }
 
 }
