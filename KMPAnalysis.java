@@ -124,9 +124,9 @@ public class KMPAnalysis {
 
 
     public static void main(String[] args){
-        multiTester("stringlength", 5000, 100, 10);
-        // multiTester("randomstring", 50000, 1000, 20);
-        // multiTester("patternanddata", 5000, 250, 10);
+        multiTester("stringlength", 500000, 10000, 20);
+        multiTester("randomstring", 500000, 10000, 20);
+        multiTester("patternanddata", 500000, 10000, 20);
 
     }
 }
