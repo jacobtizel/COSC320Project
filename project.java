@@ -89,7 +89,7 @@ public static int LCSSSearch(String s1, String s2) {
     return table[s1.length()][s2.length()];
 }
 
-public static String[] readOriginal(String filename){ // Reads content from original file into an array of sentences
+public static String[] readOriginal(String filename, boolean readParagraphs){ // Reads content from original file into an array of sentences
       String contents = "";
       try (BufferedReader br = new BufferedReader(new FileReader(filename))) {
          String line;
@@ -99,7 +99,7 @@ public static String[] readOriginal(String filename){ // Reads content from orig
      } catch (IOException e) {
          e.printStackTrace();
      }
-     String[] sentences= contents.split("[.!?]\\s*");
+     String[] sentences = (readParagraphs == true) ? contents.split("\n\n") : contents.split("[.!?]\\s*");
      return sentences;
    }
 
@@ -129,15 +129,29 @@ public static String[] readOriginal(String filename){ // Reads content from orig
      return contentsList;
    }
    public static void main(String[] args) {
-         String[] contents = readOriginal("./data/test1.txt");
+         String[] contents = readOriginal("./data/test1.txt",false);
          List<String> othercontents = readOther("test.txt");
          int matches = 0;
+         // USING RABIN KARP
          for (int i = 0; i < contents.length; i++) {
             for (int j = 0; j < othercontents.size(); j++) {
                if(contents[i].length()<=othercontents.get(j).length())
                matches+=RKSearch(othercontents.get(j),contents[i]); // increment number of matches with every match made
             }
          }
+
+         // USING KMP
+         for (int i = 0; i < contents.length; i++) {
+            for (int j = 0; j < othercontents.size(); j++) {
+               if(contents[i].length()<=othercontents.get(j).length())
+               matches+=KMPSearch(othercontents.get(j),contents[i]); // increment number of matches with every match made
+            }
+         }
+
+         // USING LCSS
+         int LCSSlength = 0;
+         String[] contentsParas = readOriginal("./data/test1.txt",true);
+        
       
          if(matches>=(contents.length)/2){
             System.out.println("This document is plagiarised");
