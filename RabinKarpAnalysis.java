@@ -6,8 +6,7 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
-
-public class RabinKarpAnalysis {
+public class RabinKarpAnalysis{
 
     public static int search(String n, String m) { // Rabin Karp String Matching Algorithm
         int matches = 0;
