@@ -74,6 +74,7 @@ public class RabinKarpAnalysis {
     }
 
     public static long[] algorithmicTest(String testType, int runNumber, int stepSize) {
+        long[] runtimes = new long[runNumber/stepSize]; //Runtime for each independent variable
         List<String> dataset = new ArrayList<>();
         String[] contents = new String[runNumber];
         Arrays.fill(contents, "");
