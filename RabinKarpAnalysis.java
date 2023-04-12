@@ -157,7 +157,7 @@ public class RabinKarpAnalysis{
         }
         System.out.println(Arrays.toString(avg));
         try{
-            FileWriter fw = new FileWriter("./analysis/" + testType + runNumber + ".js");
+            FileWriter fw = new FileWriter("./analysis/RK" + testType + runNumber + ".json");
             fw.write(Arrays.toString(avg));
             fw.close();
         }
@@ -183,5 +183,6 @@ public class RabinKarpAnalysis{
     multiTester("datasize", 2000, 50, 10);
     multiTester("filenumber", 2000, 50, 10);
     multiTester("filesize", 2000, 50, 10);
+    //TODO: fix RabinKarp Jupyter to new file types
     }
 }
