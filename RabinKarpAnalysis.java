@@ -178,12 +178,11 @@ public class RabinKarpAnalysis{
     }
 
     public static void main(String[] args) {
-    //algorithmicTest("datanumber", 500, 10);
-    // multiTester("datanumber", 2000, 50, 20);
-    // multiTester("datasize", 2000, 50, 20);
-    // multiTester("filenumber", 2000, 50, 20);
-    // multiTester("filesize", 2000, 50, 20);
+    multiTester("datanumber", 2000, 50, 20);
+    multiTester("datasize", 2000, 50, 20);
+    multiTester("filenumber", 2000, 50, 20);
+    multiTester("filesize", 2000, 50, 20);
 
-    multiTester("datanumber",100000, 10000, 1);
+    // multiTester("datanumber",100000, 10000, 1); //takes over an hour to run
     }
 }

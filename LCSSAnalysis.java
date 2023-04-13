@@ -109,6 +109,8 @@ public class LCSSAnalysis {
         multiTester("stringlength", 50000, 1000, 20);
         multiTester("randomstring", 50000, 1000, 20);
         multiTester("patternanddata", 5000, 250, 10);
+
+        // multiTester("randomstring",100000, 10000, 20);
     }
 
 }

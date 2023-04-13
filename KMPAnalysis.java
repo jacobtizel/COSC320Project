@@ -128,5 +128,7 @@ public class KMPAnalysis {
         multiTester("randomstring", 5000000, 100000, 20);
         multiTester("patternanddata", 500000, 10000, 20);
 
+        // multiTester("randomstring",100000, 10000, 20);
+
     }
 }

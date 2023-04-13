@@ -22,6 +22,7 @@ A formal analysis was performed on all three algorithms, which included mapping 
     ├── LCSSAnalysis.java
     ├── RabinKarpAnalysis.ipynb    # Analysis for the Rabin Karp Algorithm
     ├── RabinKarpAnalysis.java
+    ├── AlgoComparison.ipynb       # Comparison of all 3 algorithms for up to n of 500,000
     └── README.md
 
 ### Analysis Conclusion
