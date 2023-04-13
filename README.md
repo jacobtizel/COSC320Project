@@ -34,7 +34,7 @@ After conducting a thorough analysis of the three algorithms that we will be usi
 ### Task Separation and Responsibilities
 - Lakshay - Summary, Formal Analysis, Abstract, Unexpected Cases
 
-- jacob - Testing and analyzing runtimes, plotting data in Jupyter Notebook, Proofs of correctness
+- Jacob - Testing and analyzing runtimes, plotting data in Jupyter Notebook, Proofs of correctness
 
 - Ribhav - Implementation, Documentation
 
