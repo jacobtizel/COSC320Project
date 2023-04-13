@@ -32,9 +32,11 @@ After conducting a thorough analysis of the three algorithms that we will be usi
 - It was also difficult to test the running times of the algorithms against real world data, which is why for our tests we went for custom generated data which was scalable and much more easy to control. This resulted in the graphs communicating much more clearly the difference in running time and the growth functions for these algorithms.
 
 ### Task Separation and Responsibilities
-Lakshay - Summary, Formal Analysis, Abstract, Unexpected Cases
-Jacob - Testing and analyzing runtimes, plotting data in Jupyter Notebook, Proofs of correctness
-Ribhav - Implementation, Documentation
+- Lakshay - Summary, Formal Analysis, Abstract, Unexpected Cases
+
+- jacob - Testing and analyzing runtimes, plotting data in Jupyter Notebook, Proofs of correctness
+
+- Ribhav - Implementation, Documentation
 
 ### Citations
 
